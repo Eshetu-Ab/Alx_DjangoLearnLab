@@ -4,5 +4,9 @@
 ```python
 from bookshelf.models import Book
 
-book = Book(title="1984", author="George Orwell", publication_year=1949)
-book.save()
+
+Book.objects.create(
+    title="The Great Gatsby",
+    author="F. Scott Fitzgerald",
+    published_date="1925-04-10"
+)
