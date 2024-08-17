@@ -1,3 +1,11 @@
+# Utilizing the Django Admin Interface for Book Model
+
+## 1. Register the Book Model with the Admin Interface
+
+**File Modified:** `bookshelf/admin.py`
+
+**Code:**
+```python
 from django.contrib import admin
 from .models import Book
 
@@ -11,4 +19,3 @@ class BookAdmin(admin.ModelAdmin):
     
     # Add search functionality
     search_fields = ('title', 'author')
-
