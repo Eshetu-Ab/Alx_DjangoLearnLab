@@ -5,8 +5,10 @@
 from bookshelf.models import Book
 
 
+
 Book.objects.create(
-    title="The Great Gatsby",
-    author="F. Scott Fitzgerald",
-    published_date="1925-04-10"
+    title="1984",
+    author="George Orwell",
+    published_date="1949-06-08"
 )
+
