@@ -21,3 +21,4 @@ class LibraryDetailView(DetailView):
 
 
 
+
