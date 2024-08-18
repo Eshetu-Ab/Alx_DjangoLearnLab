@@ -13,3 +13,4 @@ class LibraryDetailView(DetailView):
     context_object_name = 'library'
 
 
+
