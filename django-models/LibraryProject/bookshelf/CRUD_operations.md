@@ -1,18 +1,30 @@
+# CRUD Operations
 
----
+# Create Book
+>>> ...
+>>> book = Book.objects.create(title="1984", author="George Orwell", publication_year=1949)
+>>> print(book)
+# Output: 1984
 
-### Steps to Implement:
+# Retrieve Book
+>>> ...
+>>> book = Book.objects.get(id=1)
+print(book.title, book.author, book.publication_year)
+# Output: 1984 George Orwell 1949
 
-1. **Create the File:**
-   - Navigate to your `bookshelf` app directory.
+# Update Book Title
+>>> ... 
+>>> book.title = "Nineteen Eighty-Four"
+>>> book.save()
+>>> print(book.title)
+# Output: Nineteen Eighty-Four
 
-2. **Copy and Paste the Content:**
-   - Copy the entire content provided above and paste it into a new file named `CRUD_operations.md`.
-
-3. **Save the File:**
-   - Save `CRUD_operations.md` in your `bookshelf` app directory.
-
-4. **Push to GitHub:**
-   - Commit and push the `CRUD_operations.md` file to your GitHub repository in the `0x1.Introduction_to_Django` directory.
-
-This `CRUD_operations.md` file now includes complete documentation for all CRUD operations.
+# Delete Book
+>>> from bookshelf.models import Book
+>>> book.delete()
+>>> book = Book.objects.first()
+>>> Book.objects.filter(id=1).delete()
+(0, {})
+>>> books = Book.objects.all()
+>>> print(list(books))
+# Output: []

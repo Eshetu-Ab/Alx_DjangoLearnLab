@@ -1,11 +1,11 @@
-## Delete Operation
+# delete.md
 
-**Command:**
-```python
-from bookshelf.models import Book
-
-book = Book.objects.get(pk=1)  # Retrieve the book with ID 1
-book.delete()  # Delete the book
-
-Book.objects.filter(title="1984").delete()
-
+# Delete Book
+>>> from bookshelf.models import Book
+>>> book.delete()
+>>> book = Book.objects.first()
+>>> Book.objects.filter(id=1).delete()
+(0, {})
+>>> books = Book.objects.all()
+>>> print(list(books))
+# Output: []

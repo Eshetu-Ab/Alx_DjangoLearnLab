@@ -1,14 +1,7 @@
-## Create Operation
+# create.md
 
-**Command:**
-```python
-from bookshelf.models import Book
-
-
-
-Book.objects.create(
-    title="1984",
-    author="George Orwell",
-    published_date="1949-06-08"
-)
-
+# Create Book
+>>> ...
+>>> book = Book.objects.create(title="1984", author="George Orwell", publication_year=1949)
+>>> print(book)
+# Output: 1984
