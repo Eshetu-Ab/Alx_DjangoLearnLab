@@ -44,3 +44,28 @@ Permissions are enforced in views using the `@permission_required` decorator. Fo
 def edit_book(request, pk):
     ...
 # CSRF protection enabled for all forms
+
+
+
+
+
+## HTTPS and Security Configuration
+
+### Django Settings
+
+- **SECURE_SSL_REDIRECT**: Redirects all HTTP requests to HTTPS.
+- **SECURE_HSTS_SECONDS**: Sets HSTS to one year.
+- **SECURE_HSTS_INCLUDE_SUBDOMAINS**: Applies HSTS to subdomains.
+- **SECURE_HSTS_PRELOAD**: Allows inclusion in HSTS preload list.
+- **SESSION_COOKIE_SECURE** and **CSRF_COOKIE_SECURE**: Ensures cookies are sent over HTTPS only.
+- **X_FRAME_OPTIONS**: Prevents clickjacking.
+- **SECURE_CONTENT_TYPE_NOSNIFF**: Prevents MIME-sniffing.
+- **SECURE_BROWSER_XSS_FILTER**: Enables XSS filtering.
+
+### Deployment Configuration
+
+- **Nginx Configuration**: Includes HTTPS redirection and SSL settings.
+
+### Security Review
+
+The application has been configured to enforce HTTPS, use secure cookies, and implement additional security headers. Ensure your deployment environment has SSL/TLS certificates properly configured.
