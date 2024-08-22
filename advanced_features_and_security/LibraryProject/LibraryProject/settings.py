@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -78,15 +79,16 @@ WSGI_APPLICATION = 'LibraryProject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "libraryproject",
-        "USER": "root",
-        "PASSWORD": "19470706@BOAgye233.",
-        "HOST": "127.0.0.1",
-        "PORT": "3306",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'libraryproject',
+        'USER': 'root',
+        'PASSWORD': 'Ea&Em@2012EC',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation

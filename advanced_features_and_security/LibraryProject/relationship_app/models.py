@@ -1,4 +1,12 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+# Example of creating a new user
+new_user = User.objects.create_user(username='user1', password='password123')
+
+
 
 
 # Author Model definition

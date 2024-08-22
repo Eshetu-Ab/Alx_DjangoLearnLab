@@ -5,6 +5,7 @@ from .models import Library
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LoginView, LogoutView
+from django.http import HttpResponse
 
 # Function-based View
 def list_books(request):
@@ -102,3 +103,5 @@ def delete_book(request, book_id):
         book.delete()
         return redirect('book_list')
     return render(request, 'relationship_app/delete_book.html', {'book': book})
+def home_view(request):
+    return HttpResponse("Welcome to the LibraryProject Home Page!")

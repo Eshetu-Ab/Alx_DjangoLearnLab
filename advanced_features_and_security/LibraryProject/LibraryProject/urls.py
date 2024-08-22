@@ -18,8 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
+from relationship_app.views import home_view  # Import the home view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('relationship_app/', include('relationship_app.urls')),
     path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
+    path('', home_view, name='home'),  # Root URL for the home page
 ]
+
