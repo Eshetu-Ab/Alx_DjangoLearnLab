@@ -43,3 +43,4 @@ Permissions are enforced in views using the `@permission_required` decorator. Fo
 @permission_required('bookshelf.can_edit', raise_exception=True)
 def edit_book(request, pk):
     ...
+# CSRF protection enabled for all forms
