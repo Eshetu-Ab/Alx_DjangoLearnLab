@@ -1,33 +1,26 @@
 from django.contrib import admin
-from .models import Book
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
 
-# Register your models here.
-class BookAdmin(admin.ModelAdmin):
-    class BookAdmin(admin.ModelAdmin):
-        list_display = ('title', 'author', 'publication_year')
-        search_fields = ('title', 'author')
-        list_filter = ('author', 'publication_year')
-
-admin.site.register(Book, BookAdmin)
-
-class UserAdmin(BaseUserAdmin):
+class CustomUserAdmin(UserAdmin):
     model = CustomUser
+    # Define the fields to be used in the admin interface
+    # Adjust these fields based on your CustomUser model's fields
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'date_of_birth', 'profile_photo')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions', 'groups')}),
+        (None, {'fields': ('username', 'email', 'password')}),
+        ('Personal info', {'fields': ('date_of_birth', 'profile_photo')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'first_name', 'last_name', 'date_of_birth', 'profile_photo'),
+            'fields': ('username', 'email', 'password1', 'password2'),
         }),
     )
-    list_display = ('username', 'first_name', 'last_name', 'date_of_birth', 'is_staff')
-    search_fields = ('username', 'first_name', 'last_name')
-    ordering = ('username',)
+    list_display = ('username', 'email', 'date_of_birth', 'is_staff')
+    search_fields = ('email', 'username')
+    ordering = ('email',)
 
-admin.site.register(CustomUser, UserAdmin)
+# Register the custom user model and admin class
+admin.site.register(CustomUser, CustomUserAdmin)
