@@ -1,0 +1,4 @@
+Gh:
+    git add .
+    git commit -m "CSRF protection enabled for all forms"
+    git push
