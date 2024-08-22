@@ -20,3 +20,26 @@ This initial setup will serve as the foundation for developing Django applicatio
 2. Navigate to `http://127.0.0.1:8000/admin/`.
 3. Log in with the superuser credentials.
 4. Manage `Book` entries through the admin interface.
+# Permissions and Groups Configuration
+
+## Custom Permissions
+
+Custom permissions added to the `Book` model:
+- `can_view`
+- `can_create`
+- `can_edit`
+- `can_delete`
+
+## Groups and Permissions
+
+- **Editors**: Assigned `can_edit` and `can_create` permissions.
+- **Viewers**: Assigned `can_view` permission.
+- **Admins**: Assigned all permissions.
+
+## Enforcing Permissions
+
+Permissions are enforced in views using the `@permission_required` decorator. For example:
+```python
+@permission_required('bookshelf.can_edit', raise_exception=True)
+def edit_book(request, pk):
+    ...
