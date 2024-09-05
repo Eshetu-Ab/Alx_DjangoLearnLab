@@ -1,32 +1,28 @@
 # api/views.py
 
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from .models import Book
-from .seriealizers import BookSerializer
-from .permissions import IsAdminUser
+from .serializers import BookSerializer
 
-class BookListView(generics.ListCreateAPIView):
+class BookCreateView(generics.CreateAPIView):
     """
-    Retrieve all books or create a new book.
-    - GET: List all books.
-    - POST: Create a new book.
+    This view handles the creation of a new Book instance.
+    Only authenticated users can create a book.
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    permission_classes = [IsAdminUser]  # Example of using custom permission
+    permission_classes = [IsAuthenticated]
 
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Retrieve, update, or delete a specific book by ID.
-    - GET: Retrieve a book.
-    - PUT/PATCH: Update a book.
-    - DELETE: Delete a book.
+    This view handles retrieving, updating, and deleting a Book instance.
+    Authenticated users can update or delete a book, while others can only view.
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
 
 
 
