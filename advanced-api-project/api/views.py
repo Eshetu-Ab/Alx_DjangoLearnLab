@@ -5,7 +5,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Book
 from .serializers import BookSerializer
 
-# List all books with filtering, searching, and ordering
 class BookListView(generics.ListAPIView):
     """
     This view handles listing all Book instances.
@@ -19,7 +18,6 @@ class BookListView(generics.ListAPIView):
     search_fields = ['title', 'author__name']
     ordering_fields = ['title', 'publication_year']
 
-# Create a new book
 class BookCreateView(generics.CreateAPIView):
     """
     This view handles the creation of a new Book instance.
@@ -29,7 +27,6 @@ class BookCreateView(generics.CreateAPIView):
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]
 
-# Retrieve, update, or delete a book by ID
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
     This view handles retrieving, updating, and deleting a Book instance.
@@ -38,6 +35,7 @@ class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
 
 
 
