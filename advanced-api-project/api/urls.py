@@ -18,9 +18,10 @@ urlpatterns = [
     path('books/<int:pk>/', BookDetailView.as_view(), name='book-detail'),
     
     # Update an existing book by ID
-    path('books/<int:pk>/update/', BookUpdateView.as_view(), name='book-update'),
+    path('books/update/<int:pk>/', BookUpdateView.as_view(), name='book-update'),
     
     # Delete a book by ID
-    path('books/<int:pk>/delete/', BookDeleteView.as_view(), name='book-delete'),
+    path('books/delete/<int:pk>/', BookDeleteView.as_view(), name='book-delete'),
 ]
+
 
