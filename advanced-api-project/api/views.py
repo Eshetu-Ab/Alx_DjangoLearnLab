@@ -49,3 +49,4 @@ class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 
+
