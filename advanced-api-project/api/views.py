@@ -1,9 +1,9 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.filters import SearchFilter, OrderingFilter
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend  # Ensure django-filter is installed
 from .models import Book
-from .serializers import BookSerializer
+from .seriealizers import BookSerializer  # Corrected import statement
 
 # List all books
 class BookListView(generics.ListAPIView):
@@ -38,6 +38,8 @@ class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+
 
 
 
