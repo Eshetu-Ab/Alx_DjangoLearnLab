@@ -1,5 +1,5 @@
 from rest_framework import filters.OrderingFilter
-from rest_framework.filters import SearchFilter
+from rest_framework import filters.SearchFilter
 from django_filters import rest_framework as filters
 from rest_framework import generics
 from .models import Book
