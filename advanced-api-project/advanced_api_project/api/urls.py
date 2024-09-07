@@ -1,9 +1,9 @@
 from django.urls import path
 from .views import (
-    BookListView, 
-    BookCreateView, 
-    BookDetailView, 
-    BookUpdateView, 
+    BookListView,
+    BookCreateView,
+    BookDetailView,
+    BookUpdateView,
     BookDeleteView
 )
 
@@ -14,5 +14,6 @@ urlpatterns = [
     path('books/<int:pk>/update/', BookUpdateView.as_view(), name='book-update'),  # Update an existing book
     path('books/<int:pk>/delete/', BookDeleteView.as_view(), name='book-delete'),  # Delete an existing book
 ]
+
 
 
