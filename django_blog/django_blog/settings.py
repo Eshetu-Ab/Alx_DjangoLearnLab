@@ -58,6 +58,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'django_blog.urls'
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
 
 TEMPLATES = [
     {
@@ -133,3 +135,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# Redirect URLs after login and logout
+LOGIN_REDIRECT_URL = '/profile/'
+LOGOUT_REDIRECT_URL = '/login/'
+
+# URL where users are redirected to log in
+LOGIN_URL = '/login/'

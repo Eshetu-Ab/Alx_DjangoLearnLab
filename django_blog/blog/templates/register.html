@@ -1,0 +1,34 @@
+{% extends 'base.html' %}  <!-- Extend the base template -->
+{% load extra_filters %}  <!-- Load the custom filters -->
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+ <!-- <h2>Register</h2> -->
+<form method="POST">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="username">Username</label>
+        {{ form.username|add_class:"form-control" }}
+    </div>
+    
+    <div class="form-group">
+        <label for="email">Email</label>
+        {{ form.email|add_class:"form-control" }}
+    </div>
+    
+    <div class="form-group">
+        <label for="password1">Password</label>
+        {{ form.password1|add_class:"form-control" }}
+    </div>
+    
+    <div class="form-group">
+        <label for="password2">Confirm Password</label>
+        {{ form.password2|add_class:"form-control" }}
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}
+
