@@ -6,6 +6,13 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django import forms
 from django.contrib.auth.models import User
 
+
+def home(request):
+    return render(request, 'home.html')
+
+def redirect_to_login(request):
+    return redirect('login')
+
 # Custom registration form with email field
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
