@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0%pe(4jp!j7oo*$5kjbft+$s5mo4wuio+6!8kj0xyui$5$q^vk'
+SECRET_KEY = 'django-insecure-bqgvt($8v#qr38(&c7$qu#z&qutvrtq9@=*r6%w)qxxh==yw$^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -52,12 +52,21 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'django_blog.urls'
 
+
 STATIC_URL = '/static/'
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'blog/static',
+]
+
+
+
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'blog/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
