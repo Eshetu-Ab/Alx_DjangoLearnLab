@@ -1,0 +1,26 @@
+<!-- templates/registration/logged_out.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Logged Out</h1>
+    </header>
+
+    <section>
+        <p>You have been logged out. <a href="{% url 'login' %}">Login again</a>.</p>
+    </section>
+
+    <footer>
+        <p>Blog Platform &copy; 2024</p>
+    </footer>
+
+    <script src="{% static 'blog/js/script.js' %}"></script>
+</body>
+</html>

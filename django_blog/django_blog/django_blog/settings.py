@@ -52,6 +52,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'django_blog.urls'
 
+# settings.py
+
+LOGIN_URL = '/login/'  # This is the URL for the login page (your custom view)
+LOGIN_REDIRECT_URL = '/profile/'  # After successful login, redirect to the profile page
+LOGOUT_REDIRECT_URL = '/'  # After logout, redirect to home or any desired page
+
+
 
 STATIC_URL = '/static/'
 
