@@ -10,4 +10,6 @@ urlpatterns = [
     # Custom views
     path('register/', views.register, name='register'),
     path('profile/', views.profile, name='profile'),
+    # Add the accounts/profile URL here
+    path('accounts/profile/', views.profile, name='profile_redirect'),
 ]

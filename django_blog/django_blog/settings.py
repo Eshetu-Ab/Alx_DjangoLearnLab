@@ -53,11 +53,15 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'django_blog.urls'
 
 
+#Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+# Directory where static files are stored during development
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Path where static files will be collected for production
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 TEMPLATES = [
     {

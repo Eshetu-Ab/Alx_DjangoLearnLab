@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
+from .models import Profile
 
 # Custom registration view
 def register(request):
@@ -18,5 +19,9 @@ def register(request):
 # Profile view (restricted to logged-in users)
 @login_required
 def profile(request):
-    return render(request, 'blog/profile.html')
+    try:
+        user_profile = request.user.profile
+    except Profile.DoesNotExist:
+        return redirect('create_profile')  # Redirect to profile creation page if profile doesn't exist
+    return render(request, 'registration/profile.html', {'profile': user_profile})
 
