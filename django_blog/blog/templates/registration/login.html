@@ -1,14 +1,30 @@
-<!-- blog/templates/registration/login.html -->
-{% extends 'base.html' %}
-{% block title %}Login{% endblock %}
+{% extends "base.html" %}
+{% load static %}
+
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-    {% csrf_token %}
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username" required>
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" required>
-    <button type="submit">Login</button>
-</form>
+    <link rel="stylesheet" href="{% static 'blog/css/login.css' %}">
+    <script src="{% static 'blog/js/login.js' %}"></script>
+
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <h2>Login</h2>
+            
+            {{ form.non_field_errors }}
+            <div class="form-group">
+                <label for="username">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                {{ form.password }}
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="links">
+            <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+        </div>
+    </div>
 {% endblock %}
+
