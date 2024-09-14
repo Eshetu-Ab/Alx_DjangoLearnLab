@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <h1>Welcome to My Blog</h1>
+    <p>This is a space where you can find interesting posts on a variety of topics!</p>
+
+    <div class="home-featured-posts">
+        <h2>Featured Posts</h2>
+        <ul>
+            <!-- Replace these with dynamic links to your posts -->
+            <li><a href="{% url 'posts' %}">Check out our latest posts</a></li>
+        </ul>
+    </div>
+
+    <div class="home-about">
+        <h2>About This Blog</h2>
+        <p>Discover interesting articles, stories, and tips curated just for you.</p>
+    </div>
+</div>
+
+<style>
+    .home-container {
+        text-align: center;
+        padding: 50px;
+    }
+
+    .home-featured-posts {
+        margin-top: 30px;
+    }
+
+    .home-about {
+        margin-top: 50px;
+    }
+
+    .home-featured-posts h2, .home-about h2 {
+        color: #4CAF50;
+    }
+
+    .home-featured-posts ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .home-featured-posts ul li a {
+        text-decoration: none;
+        color: #007BFF;
+        font-weight: bold;
+    }
+
+    .home-featured-posts ul li a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<script>
+    console.log('Home page loaded!');
+</script>
+{% endblock %}
+

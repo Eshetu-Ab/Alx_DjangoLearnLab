@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+<div class="posts-container">
+    <h1>All Blog Posts</h1>
+
+    <div class="posts-list">
+        <ul>
+            <!-- Loop through posts dynamically -->
+            {% for post in posts %}
+                <li>
+                    <a href="{% url 'post_detail' post.id %}">
+                        <h2>{{ post.title }}</h2>
+                        <p>{{ post.content|truncatewords:20 }}</p>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<style>
+    .posts-container {
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 800px;
+    }
+
+    .posts-list ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .posts-list ul li {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
+
+    .posts-list ul li a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .posts-list ul li a:hover h2 {
+        color: #007BFF;
+    }
+
+    .posts-list ul li h2 {
+        margin: 0;
+        font-size: 1.5em;
+    }
+
+    .posts-list ul li p {
+        color: #666;
+    }
+</style>
+
+<script>
+    console.log('Posts page loaded!');
+</script>
+{% endblock %}
