@@ -8,6 +8,8 @@ from notifications.models import Notification
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404  # Correct import
+from django.views import generic
+
 
 # Post View CRUD Operations
 class PostViewSet(viewsets.ModelViewSet):
@@ -47,7 +49,7 @@ class PostLikeViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
 
     def like(self, request, pk):
-        post = get_object_or_404(Post, pk=pk)  # Use get_object_or_404 correctly
+        post = generics.get_object_or_404(Post, pk=pk)  # Use get_object_or_404 correctly
         like, created = Like.objects.get_or_create(user=request.user, post=post)
 
         if created:
