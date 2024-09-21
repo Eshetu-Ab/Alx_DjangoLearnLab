@@ -9,7 +9,7 @@ from rest_framework import filters
 from notifications.models import Notification
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.contenttypes.models import ContentType
-from .serializers import NotificationSerializer
+from django.shortcuts import get_object_or_404  # Import this
 
 # Post View CRUD Operations
 class PostViewSet(viewsets.ModelViewSet):
@@ -49,7 +49,7 @@ class PostLikeViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
 
     def like(self, request, pk):
-        post = Post.objects.get(pk=pk)
+        post = get_object_or_404(Post, pk=pk)  # Use get_object_or_404
         like, created = Like.objects.get_or_create(user=request.user, post=post)
 
         if created:
@@ -65,19 +65,10 @@ class PostLikeViewSet(viewsets.ViewSet):
         return Response({"message": "You have already liked this post."}, status=status.HTTP_400_BAD_REQUEST)
 
     def unlike(self, request, pk):
-        post = Post.objects.get(pk=pk)
+        post = get_object_or_404(Post, pk=pk)  # Use get_object_or_404
         try:
             like = Like.objects.get(user=request.user, post=post)
             like.delete()
             return Response({"message": "Post unliked!"}, status=status.HTTP_204_NO_CONTENT)
         except Like.DoesNotExist:
             return Response({"message": "You have not liked this post."}, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-class NotificationViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = NotificationSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return Notification.objects.filter(recipient=self.request.user).order_by('-timestamp')
