@@ -1,12 +1,15 @@
 # social_media_api/posts/views.py
 
-from rest_framework import viewsets, permissions, generics
-from .models import Post, Comment
+from rest_framework import viewsets, permissions, generics, status
+from rest_framework.response import Response
+from .models import Post, Comment, Like  # Ensure Like is imported
 from .serializers import PostSerializer, CommentSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
-from .models import Post
+from notifications.models import Notification
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.contenttypes.models import ContentType
+from .serializers import NotificationSerializer
 
 # Post View CRUD Operations
 class PostViewSet(viewsets.ModelViewSet):
@@ -40,3 +43,41 @@ class FeedView(generics.ListAPIView):
         following_users = user.following.all()
         # Return posts authored by followed users, ordered by creation date (newest first)
         return Post.objects.filter(author__in=following_users).order_by('-created_at')
+
+# Like Functionality
+class PostLikeViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+
+    def like(self, request, pk):
+        post = Post.objects.get(pk=pk)
+        like, created = Like.objects.get_or_create(user=request.user, post=post)
+
+        if created:
+            # Create a notification
+            Notification.objects.create(
+                recipient=post.author,
+                actor=request.user,
+                verb='liked your post',
+                target_content_type=ContentType.objects.get_for_model(Post),
+                target_object_id=post.id
+            )
+            return Response({"message": "Post liked!"}, status=status.HTTP_201_CREATED)
+        return Response({"message": "You have already liked this post."}, status=status.HTTP_400_BAD_REQUEST)
+
+    def unlike(self, request, pk):
+        post = Post.objects.get(pk=pk)
+        try:
+            like = Like.objects.get(user=request.user, post=post)
+            like.delete()
+            return Response({"message": "Post unliked!"}, status=status.HTTP_204_NO_CONTENT)
+        except Like.DoesNotExist:
+            return Response({"message": "You have not liked this post."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class NotificationViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = NotificationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Notification.objects.filter(recipient=self.request.user).order_by('-timestamp')
