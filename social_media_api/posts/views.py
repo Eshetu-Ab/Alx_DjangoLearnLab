@@ -9,7 +9,7 @@ from rest_framework import filters
 from notifications.models import Notification
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.contenttypes.models import ContentType
-from django.shortcuts import get_object_or_404  # Import this
+from django.shortcuts import get_object_or_404  # Correct import
 
 # Post View CRUD Operations
 class PostViewSet(viewsets.ModelViewSet):
@@ -49,7 +49,7 @@ class PostLikeViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
 
     def like(self, request, pk):
-        post = get_object_or_404(Post, pk=pk)  # Use get_object_or_404
+        post = get_object_or_404(Post, pk=pk)  # Correct usage
         like, created = Like.objects.get_or_create(user=request.user, post=post)
 
         if created:
@@ -65,10 +65,11 @@ class PostLikeViewSet(viewsets.ViewSet):
         return Response({"message": "You have already liked this post."}, status=status.HTTP_400_BAD_REQUEST)
 
     def unlike(self, request, pk):
-        post = get_object_or_404(Post, pk=pk)  # Use get_object_or_404
+        post = get_object_or_404(Post, pk=pk)  # Correct usage
         try:
             like = Like.objects.get(user=request.user, post=post)
             like.delete()
             return Response({"message": "Post unliked!"}, status=status.HTTP_204_NO_CONTENT)
         except Like.DoesNotExist:
             return Response({"message": "You have not liked this post."}, status=status.HTTP_400_BAD_REQUEST)
+
