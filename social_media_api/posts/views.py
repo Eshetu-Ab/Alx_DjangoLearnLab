@@ -72,4 +72,3 @@ class PostLikeViewSet(viewsets.ViewSet):
             return Response({"message": "Post unliked!"}, status=status.HTTP_204_NO_CONTENT)
         except Like.DoesNotExist:
             return Response({"message": "You have not liked this post."}, status=status.HTTP_400_BAD_REQUEST)
-
