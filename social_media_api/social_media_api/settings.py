@@ -91,7 +91,15 @@ WSGI_APPLICATION = 'social_media_api.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://localhost')
+ 
+       'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'smapidb',
+        'USER': 'root',
+        'PASSWORD': 'Ea&Em@2012EC',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
 }
 
 
