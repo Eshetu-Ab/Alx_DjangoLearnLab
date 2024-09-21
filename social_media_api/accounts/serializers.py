@@ -1,16 +1,21 @@
 from rest_framework import serializers
 from .models import CustomUser
 from django.contrib.auth import get_user_model
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
     class Meta:
-        model = get_user_model()
-        fields = ('id', 'username', 'password', 'bio', 'profile_picture', 'followers')
-        extra_kwargs = {'password': {'write_only': True}}
+        model = User
+        fields = ('username', 'email', 'password')
 
     def create(self, validated_data):
-        user = get_user_model().objects.create_user(
-            username=validated_data['username'],
-            password=validated_data['password']
-        )
+        user = User(**validated_data)
+        user.set_password(validated_data['password'])  # Hash the password
+        user.save()
+        Token.objects.create(user=user)  # Create a token for the new user
         return user
+
