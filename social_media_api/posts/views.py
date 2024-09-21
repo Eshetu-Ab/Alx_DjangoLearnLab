@@ -47,7 +47,7 @@ class PostLikeViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
 
     def like(self, request, pk):
-        post = get_object_or_404(Post, pk=pk)  # Use this directly
+        post = get_object_or_404(Post, pk=pk)  # Correct usage
         like, created = Like.objects.get_or_create(user=request.user, post=post)
 
         if created:
@@ -62,7 +62,7 @@ class PostLikeViewSet(viewsets.ViewSet):
         return Response({"message": "You have already liked this post."}, status=status.HTTP_400_BAD_REQUEST)
 
     def unlike(self, request, pk):
-        post = get_object_or_404(Post, pk=pk)  # Use this directly
+        post = get_object_or_404(Post, pk=pk)  # Correct usage
         try:
             like = Like.objects.get(user=request.user, post=post)
             like.delete()
