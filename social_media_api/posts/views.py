@@ -39,9 +39,7 @@ class FeedView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        # Fetch all the users the current user is following
         following_users = user.following.all()
-        # Return posts authored by followed users, ordered by creation date (newest first)
         return Post.objects.filter(author__in=following_users).order_by('-created_at')
 
 # Like Functionality
@@ -49,11 +47,10 @@ class PostLikeViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
 
     def like(self, request, pk):
-        post = get_object_or_404(Post, pk=pk)  # Correct usage
+        post = get_object_or_404(Post, pk=pk)  # Use this directly
         like, created = Like.objects.get_or_create(user=request.user, post=post)
 
         if created:
-            # Create a notification
             Notification.objects.create(
                 recipient=post.author,
                 actor=request.user,
@@ -65,7 +62,7 @@ class PostLikeViewSet(viewsets.ViewSet):
         return Response({"message": "You have already liked this post."}, status=status.HTTP_400_BAD_REQUEST)
 
     def unlike(self, request, pk):
-        post = get_object_or_404(Post, pk=pk)  # Correct usage
+        post = get_object_or_404(Post, pk=pk)  # Use this directly
         try:
             like = Like.objects.get(user=request.user, post=post)
             like.delete()
